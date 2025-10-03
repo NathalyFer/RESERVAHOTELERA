@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Habitaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-list>
+    <ion-item *ngFor="let h of habitaciones">
+      <ion-label>
+        <h2>Habitación {{ h.numero }}</h2>
+        <p>Tipo: {{ h.tipo }}</p>
+        <p>Precio: ${{ h.precio }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Número</ion-label>
+    <ion-input type="number" [(ngModel)]="nuevaHabitacion.numero"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo</ion-label>
+    <ion-input [(ngModel)]="nuevaHabitacion.tipo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Precio</ion-label>
+    <ion-input type="number" [(ngModel)]="nuevaHabitacion.precio"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="agregarHabitacion()">
+    Agregar Habitación
+  </ion-button>
+
+</ion-content>
