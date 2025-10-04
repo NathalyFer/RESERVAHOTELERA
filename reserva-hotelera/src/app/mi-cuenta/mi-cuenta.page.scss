@@ -1,0 +1,186 @@
+/* ===== Variables de color ===== */
+:host {
+  --color-calipso: #00bcd4;
+  --color-blanco: #ffffff;
+  --color-gris-claro: #ffffff;
+  --color-gris-texto: #6c757d;
+  --color-azul-oscuro: #007a91;
+}
+
+/* ===== General ===== */
+ion-content {
+  --background: var(--color-blanco);
+  color: var(--color-azul-oscuro);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ion-header {
+  --background: var(--color-blanco);
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+/* ===== Menú ===== */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-item {
+  color: var(--color-calipso);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+  color: var(--color-azul-oscuro);
+}
+
+.menu ion-avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-calipso);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu ion-avatar img:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Formulario (ion-card) ===== */
+.card-registrarse {
+  margin: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  background: var(--color-blanco);
+}
+
+ion-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-calipso);
+}
+
+/* ===== Botones ===== */
+ion-button.btn-green {
+  --background: var(--color-calipso);
+  --border-radius: 30px;
+  font-weight: 700;
+  padding: 12px 30px;
+  box-shadow: 0 6px 15px rgba(0, 188, 212, 0.3);
+  text-transform: uppercase;
+}
+
+ion-button.btn-green:hover {
+  --background: var(--color-azul-oscuro);
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.guardar {
+  margin-top: 12px;
+}
+
+/* ===== Footer ===== (si se incluye en esta misma página) */
+.footer-divider {
+  border: none;
+  border-top: 2px solid var(--color-calipso);
+  margin: 40px 0 30px;
+  width: 100%;
+}
+
+.footer-section {
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-calipso);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  font-size: 2rem;
+  color: var(--color-calipso);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--color-azul-oscuro);
+  transform: scale(1.2);
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-end;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  text-align: right;
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+  color: var(--color-calipso);
+  min-width: 30px;
+  margin-top: 5px;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contact-details p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-azul-oscuro);
+  font-weight: 500;
+  line-height: 1.4;
+}

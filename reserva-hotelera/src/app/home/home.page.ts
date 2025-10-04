@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 /*import { Preferences } from '@capacitor/preferences';*/
-import { HomePageRoutingModule } from './home-routing.module';
 
 
 
