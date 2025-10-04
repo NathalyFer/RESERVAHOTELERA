@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'info-cliente-modal',
     loadChildren: () => import('./info-cliente-modal/info-cliente-modal.module').then( m => m.InfoClienteModalPageModule)
   },
+  {
+    path: 'reservas',
+    loadChildren: () => import('./reservas/reservas.module').then( m => m.ReservasPageModule)
+  },
 
 ];
 

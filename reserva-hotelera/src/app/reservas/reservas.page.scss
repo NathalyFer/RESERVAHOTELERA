@@ -1,0 +1,26 @@
+.page { padding: 12px; max-width: 980px; margin: 0 auto; }
+.hero { display: flex; gap: 8px; align-items: center; margin: 2px 6px 10px; }
+.hero-icon { font-size: 20px; opacity: .7; }
+.hero-text h1 { margin: 0; font-size: 18px; }
+.hero-text p { margin: 2px 0 0; color: var(--ion-color-medium); font-size: 13px; }
+
+.glass { border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+
+.grid-gap { --ion-grid-column-padding: 6px; margin-top: 6px; }
+
+.field {
+  --min-height: 40px;
+  --padding-start: 8px;
+  --inner-padding-end: 6px;
+  --inner-padding-top: 2px;
+  --inner-padding-bottom: 2px;
+  border-radius: 10px;
+}
+
+ion-input[type="date"] { font-size: 14px; }
+ion-input, ion-select { --padding-top: 2px; --padding-bottom: 2px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.btn-guardar { --border-radius: 20px; font-weight: 600; }
+
+.footnote { display: block; margin-top: 8px; font-size: 12px; }
