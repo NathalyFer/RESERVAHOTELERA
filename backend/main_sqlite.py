@@ -59,7 +59,7 @@ def listar_habitaciones():
     cursor.execute("SELECT id_habitacion, nombre, precio, foto, estado FROM Habitacion ORDER BY id_habitacion")
     rows = cursor.fetchall()
     conn.close()
-    return [{"id": int(r[0]), "nombre": r[1], "precio": float(r[2]), "foto": r[3], "estado": r[4]} for r in rows]
+    return [{"id": int(r[0]), "nombre": r[1], "precio": float(r[2]), "foto": f"/uploads/{r[3]}" if r[3] else None, "estado": r[4]} for r in rows]
 
 @app.post("/habitaciones", response_model=HabitacionOut, status_code=201)
 async def crear_habitacion(

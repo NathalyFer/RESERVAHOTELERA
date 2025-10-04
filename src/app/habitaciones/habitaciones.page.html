@@ -1,29 +1,38 @@
 <ion-header><ion-toolbar><ion-title>Habitaciones</ion-title></ion-toolbar></ion-header>
 <ion-content class="ion-padding">
   <form (ngSubmit)="guardar()">
-    <ion-item><ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="nombre" name="nombre" required></ion-input></ion-item>
-
-    <ion-item><ion-label position="floating">Número</ion-label>
-      <ion-input type="number" [(ngModel)]="numero" name="numero" required></ion-input></ion-item>
-
-    <ion-item><ion-label position="floating">Tipo</ion-label>
-      <ion-input [(ngModel)]="tipo" name="tipo" required></ion-input></ion-item>
-
-    <ion-item><ion-label position="floating">Precio</ion-label>
-      <ion-input type="number" [(ngModel)]="precio" name="precio" required></ion-input></ion-item>
-
     <ion-item>
-      <input type="file" (change)="onFileSelected($event)" />
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" name="nombre" required aria-label="Nombre de la habitación"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" type="submit">Guardar Habitación</ion-button>
+    <ion-item>
+      <ion-label position="floating">Número</ion-label>
+      <ion-input type="number" [(ngModel)]="numero" name="numero" required aria-label="Número de habitación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Tipo</ion-label>
+      <ion-input [(ngModel)]="tipo" name="tipo" required aria-label="Tipo de habitación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="precio" name="precio" required aria-label="Precio de la habitación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Foto de la habitación</ion-label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" aria-label="Seleccionar foto de la habitación" />
+    </ion-item>
+
+    <ion-button expand="block" type="submit" aria-label="Guardar nueva habitación">Guardar Habitación</ion-button>
   </form>
 
   <ion-list>
     <ion-item *ngFor="let h of habitaciones">
       <ion-thumbnail slot="start" *ngIf="h.foto">
-        <img [src]="'http://127.0.0.1:8000' + h.foto" />
+        <img [src]="'http://127.0.0.1:8000' + h.foto" [alt]="'Foto de ' + h.nombre" />
       </ion-thumbnail>
       <ion-label>
         <h2>{{ h.nombre }}</h2>
