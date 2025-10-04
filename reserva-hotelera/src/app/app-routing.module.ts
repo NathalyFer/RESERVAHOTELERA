@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'mi-cuenta',
     loadChildren: () => import('./mi-cuenta/mi-cuenta.module').then( m => m.MiCuentaPageModule)
+  },  {
+    path: 'info-cliente-modal',
+    loadChildren: () => import('./info-cliente-modal/info-cliente-modal.module').then( m => m.InfoClienteModalPageModule)
   },
+
 ];
 
 @NgModule({
