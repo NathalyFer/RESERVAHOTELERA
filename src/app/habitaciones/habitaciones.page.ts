@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HabitacionesService, Habitacion } from '../services/habitaciones.service';
 
 @Component({
@@ -8,35 +9,42 @@ import { HabitacionesService, Habitacion } from '../services/habitaciones.servic
   standalone: false
 })
 export class HabitacionesPage implements OnInit {
-
   habitaciones: Habitacion[] = [];
-  nuevaHabitacion: Habitacion = { numero: 0, tipo: '', precio: 0 };
+  id_habitacion?: number; 
+  nombre = '';
+  numero = 0;
+  tipo = '';
+  precio = 0;
+  estado = '';
+  fotoFile: File | null = null;
 
-  constructor(private habitacionesService: HabitacionesService) {}
+  constructor(private habService: HabitacionesService) {}
 
-  ngOnInit() {
-    this.cargarHabitaciones();
-  }
+  ngOnInit() { this.cargar(); }
 
-  cargarHabitaciones() {
-    this.habitacionesService.getHabitaciones().subscribe(data => {
-      this.habitaciones = data;
-    });
-  }
-
-  agregarHabitacion() {
-    console.log('Intentando agregar habitación:', this.nuevaHabitacion);
-    this.habitacionesService.addHabitacion(this.nuevaHabitacion).subscribe({
-      next: (response) => {
-        console.log('Habitación agregada exitosamente:', response);
-        this.cargarHabitaciones(); // recargar lista
-        this.nuevaHabitacion = { numero: 0, tipo: '', precio: 0 }; // limpiar form
+  cargar() {
+    this.habService.getHabitaciones().subscribe({
+      next: (data) => {
+        this.habitaciones = data;
+        console.log('Habitaciones cargadas', data);
       },
-      error: (error) => {
-        console.error('Error al agregar habitación:', error);
-        alert('Error al agregar habitación: ' + (error.error?.details || error.message));
-      }
+      error: (err) => console.error('Error al cargar', err)
     });
+  }
+
+  loadHabitaciones() {
+    this.cargar();
+  }
+  onFileSelected(e: any) {
+    this.fotoFile = e.target.files?.[0] ?? null;
+  }
+
+  guardar() {
+    if (!this.nombre || !this.precio) { alert('Completa nombre y precio'); return; }
+    this.habService.createHabitacion({ nombre: this.nombre, precio: this.precio, numero: this.numero, tipo: this.tipo }, this.fotoFile ?? undefined)
+      .subscribe({
+        next: () => { this.nombre=''; this.numero=0; this.tipo=''; this.precio=0; this.fotoFile=null; this.cargar(); },
+        error: (e) => { console.error('Error crear:', e); alert('Error al guardar'); }
+      });
   }
 }
-

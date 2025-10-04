@@ -1,93 +1,82 @@
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, UploadFile, Form, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from typing import List
+from uuid import uuid4
+import os, shutil
 import oracledb
-import os
-from dotenv import load_dotenv
 
-load_dotenv()  # opcional: usa .env para credenciales
+# Config
+UPLOAD_DIR = "uploads"
+os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-DB_USER = os.getenv("DB_USER", "TU_USUARIO")
-DB_PASS = os.getenv("DB_PASS", "TU_PASSWORD")
-DB_DSN  = os.getenv("DB_DSN", "localhost:8100")  # ajusta host:port/service
+DB_USER = "ADMIN"
+DB_PASS = "Meruemgato141#"
+DB_DSN  = "SEJk:SA-SANTIAGO-1-AD-1"   
 
-# Conexión simple (para prototipo). Para producción usa pool
-connection = oracledb.connect(user=DB_USER, password=DB_PASS, dsn=DB_DSN, encoding="UTF-8")
+# Conexión (para prototipo; en prod usar SessionPool)
+conn = oracledb.connect(user=DB_USER, password=DB_PASS, dsn=DB_DSN, encoding="UTF-8")
 
 app = FastAPI()
-
-# CORS (permite peticiones desde ionic serve)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8100", "http://127.0.0.1:8100", "*"],  
+    allow_origins=["http://localhost:8100", "http://127.0.0.1:8100", "*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class HabitacionIn(BaseModel):
-    numero: int
-    tipo: str
+# Servir archivos estáticos (fotos)
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
+class HabitacionOut(BaseModel):
+    id: int
+    nombre: str
     precio: float
-    estado: str = "Disponible"
+    foto: str | None
+    estado: str
 
-class HabitacionOut(HabitacionIn):
-    id_habitacion: int
-
-@app.get("/habitaciones", response_model=List[HabitacionOut])
+@app.get("/habitaciones", response_model=list[HabitacionOut])
 def listar_habitaciones():
-    cur = connection.cursor()
-    cur.execute("SELECT id_habitacion, numero, tipo, precio, estado FROM Habitacion ORDER BY numero")
+    cur = conn.cursor()
+    cur.execute("SELECT id_habitacion, nombre, precio, foto, estado FROM Habitacion ORDER BY id_habitacion")
     rows = cur.fetchall()
-    result = []
-    for r in rows:
-        result.append({
-            "id_habitacion": int(r[0]),
-            "numero": int(r[1]),
-            "tipo": r[2],
-            "precio": float(r[3]),
-            "estado": r[4]
-        })
     cur.close()
-    return result
+    return [{"id": int(r[0]), "nombre": r[1], "precio": float(r[2]), "foto": r[3], "estado": r[4]} for r in rows]
 
-@app.post("/habitaciones", status_code=201)
-def crear_habitacion(h: HabitacionIn):
+@app.post("/habitaciones", response_model=HabitacionOut, status_code=201)
+async def crear_habitacion(
+    numero: int = Form(...),            
+    tipo: str = Form(...),              
+    nombre: str = Form(...),
+    precio: float = Form(...),
+    foto: UploadFile | None = File(None),
+    estado: str = Form("Disponible")
+):
+    # Guardar fichero si viene
+    foto_nombre = None
+    if foto:
+        foto_nombre = f"{uuid4().hex}_{os.path.basename(foto.filename)}"
+        destino = os.path.join(UPLOAD_DIR, foto_nombre)
+        with open(destino, "wb") as buffer:
+            shutil.copyfileobj(foto.file, buffer)
+
+    # Insertar en Oracle y obtener id con RETURNING
+    cur = conn.cursor()
+    id_var = cur.var(oracledb.NUMBER)
     try:
-        cur = connection.cursor()
         cur.execute(
-            "INSERT INTO Habitacion (numero, tipo, precio, estado) VALUES (:1, :2, :3, :4)",
-            (h.numero, h.tipo, h.precio, h.estado)
+            """INSERT INTO Habitacion (numero, tipo, nombre, foto, precio, estado) 
+               VALUES (:1, :2, :3, :4, :5, :6) 
+               RETURNING id_habitacion INTO :7""",
+            (numero, tipo, nombre, foto_nombre, precio, estado, id_var)
         )
-        connection.commit()
-        cur.close()
-        return {"message": "Habitación creada"}
+        conn.commit()
+        new_id = int(id_var.getvalue()[0])
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.put("/habitaciones/{id_hab}")
-def actualizar_habitacion(id_hab: int, h: HabitacionIn):
-    cur = connection.cursor()
-    cur.execute(
-        "UPDATE Habitacion SET numero=:1, tipo=:2, precio=:3, estado=:4 WHERE id_habitacion=:5",
-        (h.numero, h.tipo, h.precio, h.estado, id_hab)
-    )
-    connection.commit()
-    if cur.rowcount == 0:
         cur.close()
-        raise HTTPException(status_code=404, detail="No encontrado")
+        raise HTTPException(status_code=500, detail=str(e))
     cur.close()
-    return {"updated": cur.rowcount}
 
-@app.delete("/habitaciones/{id_hab}")
-def eliminar_habitacion(id_hab: int):
-    cur = connection.cursor()
-    cur.execute("DELETE FROM Habitacion WHERE id_habitacion=:1", (id_hab,))
-    connection.commit()
-    deleted = cur.rowcount
-    cur.close()
-    if deleted == 0:
-        raise HTTPException(status_code=404, detail="No encontrado")
-    return {"deleted": deleted}
+    foto_url = f"/uploads/{foto_nombre}" if foto_nombre else None
+    return {"id": new_id, "nombre": nombre, "precio": precio, "foto": foto_url, "estado": estado}
