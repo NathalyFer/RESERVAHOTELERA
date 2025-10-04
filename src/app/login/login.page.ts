@@ -66,6 +66,7 @@ export class LoginPage {
       });
 
       localStorage.setItem('usuarioActivo', 'true');
+      localStorage.setItem('user_session', JSON.stringify(user));
 
       this.navCtrl.navigateForward(['/home'], {
         queryParams: {

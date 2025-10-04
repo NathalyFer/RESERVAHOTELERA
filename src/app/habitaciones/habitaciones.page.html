@@ -1,6 +1,11 @@
 <ion-header><ion-toolbar><ion-title>Habitaciones</ion-title></ion-toolbar></ion-header>
 <ion-content class="ion-padding">
-  <form (ngSubmit)="guardar()">
+  <!-- Formulario solo visible para administradores -->
+  <div *ngIf="isAdmin">
+    <h3 *ngIf="modoEdicion">Editando Habitación</h3>
+    <h3 *ngIf="!modoEdicion">Nueva Habitación</h3>
+    
+    <form (ngSubmit)="guardar()">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
       <ion-input [(ngModel)]="nombre" name="nombre" required aria-label="Nombre de la habitación"></ion-input>
@@ -17,18 +22,36 @@
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Precio</ion-label>
-      <ion-input type="number" [(ngModel)]="precio" name="precio" required aria-label="Precio de la habitación"></ion-input>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea [(ngModel)]="descripcion" name="descripcion" rows="3" aria-label="Descripción de la habitación"></ion-textarea>
     </ion-item>
 
     <ion-item>
-      <ion-label>Foto de la habitación</ion-label>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="precio" name="precio" required step="1" min="0" aria-label="Precio de la habitación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-input [(ngModel)]="estado" name="estado" aria-label="Estado de la habitación"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Foto de la habitación {{ modoEdicion ? '(opcional - dejar vacío para mantener actual)' : '' }}</ion-label>
       <input type="file" (change)="onFileSelected($event)" accept="image/*" aria-label="Seleccionar foto de la habitación" />
     </ion-item>
 
-    <ion-button expand="block" type="submit" aria-label="Guardar nueva habitación">Guardar Habitación</ion-button>
+    <ion-button expand="block" type="submit" color="primary" aria-label="Guardar habitación">
+      {{ modoEdicion ? 'Actualizar' : 'Guardar' }} Habitación
+    </ion-button>
+    
+    <ion-button expand="block" type="button" color="light" (click)="cancelar()" *ngIf="modoEdicion" aria-label="Cancelar edición">
+      Cancelar
+    </ion-button>
   </form>
+  </div>
 
+  <h3>{{ isAdmin ? 'Lista de Habitaciones' : 'Habitaciones Disponibles' }}</h3>
   <ion-list>
     <ion-item *ngFor="let h of habitaciones">
       <ion-thumbnail slot="start" *ngIf="h.foto">
@@ -36,8 +59,16 @@
       </ion-thumbnail>
       <ion-label>
         <h2>{{ h.nombre }}</h2>
-        <p>Precio: ${{ h.precio }} — Estado: {{ h.estado }}</p>
+        <p *ngIf="h.descripcion">{{ h.descripcion }}</p>
+        <p>Precio: ${{ h.precio | number:'1.0-0' }} — Estado: {{ h.estado }}</p>
+        <p *ngIf="isAdmin">Número: {{ h.numero }} — Tipo: {{ h.tipo }}</p>
       </ion-label>
+      <ion-button *ngIf="!isAdmin && h.estado === 'Disponible'" slot="end" color="primary" routerLink="/reserva" [queryParams]="{habitacion: h.nombre}" aria-label="Reservar habitación">
+        Reservar
+      </ion-button>
+      <ion-button *ngIf="isAdmin" slot="end" fill="clear" (click)="editar(h)" aria-label="Editar habitación">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -8,6 +8,7 @@ export interface Habitacion {
   nombre: string;
   numero: number;
   tipo: string;
+  descripcion?: string;
   precio: number;
   estado: string;
   foto?: string | null;
@@ -23,14 +24,27 @@ export class HabitacionesService {
     return this.http.get<Habitacion[]>(`${this.base}/habitaciones`);
   }
 
-  createHabitacion(payload: { nombre: string; numero: number; tipo: string; precio: number; estado?: string }, foto?: File): Observable<any> {
+  createHabitacion(payload: { nombre: string; numero: number; tipo: string; descripcion?: string; precio: number; estado?: string }, foto?: File): Observable<any> {
     const fd = new FormData();
     fd.append('nombre', payload.nombre);
     fd.append('numero', payload.numero.toString());
     fd.append('tipo', payload.tipo);
+    fd.append('descripcion', payload.descripcion ?? '');
     fd.append('precio', payload.precio.toString());
     fd.append('estado', payload.estado ?? 'Disponible');
     if (foto) fd.append('foto', foto, foto.name);
     return this.http.post(`${this.base}/habitaciones`, fd);
+  }
+
+  updateHabitacion(id: number, payload: { nombre: string; numero: number; tipo: string; descripcion?: string; precio: number; estado?: string }, foto?: File): Observable<any> {
+    const fd = new FormData();
+    fd.append('nombre', payload.nombre);
+    fd.append('numero', payload.numero.toString());
+    fd.append('tipo', payload.tipo);
+    fd.append('descripcion', payload.descripcion ?? '');
+    fd.append('precio', payload.precio.toString());
+    fd.append('estado', payload.estado ?? 'Disponible');
+    if (foto) fd.append('foto', foto, foto.name);
+    return this.http.put(`${this.base}/habitaciones/${id}`, fd);
   }
 }

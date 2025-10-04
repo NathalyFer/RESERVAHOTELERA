@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HabitacionesService, Habitacion } from '../services/habitaciones.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-habitaciones',
@@ -14,13 +15,22 @@ export class HabitacionesPage implements OnInit {
   nombre = '';
   numero = 0;
   tipo = '';
+  descripcion = '';
   precio = 0;
-  estado = '';
+  estado = 'Disponible';
   fotoFile: File | null = null;
+  modoEdicion = false;
+  isAdmin = false;
 
-  constructor(private habService: HabitacionesService) {}
+  constructor(
+    private habService: HabitacionesService,
+    private dataService: DataService
+  ) {}
 
-  ngOnInit() { this.cargar(); }
+  ngOnInit() { 
+    this.cargar();
+    this.isAdmin = this.dataService.isAdmin();
+  }
 
   cargar() {
     this.habService.getHabitaciones().subscribe({
@@ -35,16 +45,76 @@ export class HabitacionesPage implements OnInit {
   loadHabitaciones() {
     this.cargar();
   }
+  
   onFileSelected(e: any) {
     this.fotoFile = e.target.files?.[0] ?? null;
   }
 
   guardar() {
     if (!this.nombre || !this.precio) { alert('Completa nombre y precio'); return; }
-    this.habService.createHabitacion({ nombre: this.nombre, precio: this.precio, numero: this.numero, tipo: this.tipo }, this.fotoFile ?? undefined)
-      .subscribe({
-        next: () => { this.nombre=''; this.numero=0; this.tipo=''; this.precio=0; this.fotoFile=null; this.cargar(); },
-        error: (e) => { console.error('Error crear:', e); alert('Error al guardar'); }
-      });
+    
+    if (this.modoEdicion && this.id_habitacion) {
+      // Actualizar
+      this.habService.updateHabitacion(this.id_habitacion, { 
+        nombre: this.nombre, 
+        precio: this.precio, 
+        numero: this.numero, 
+        tipo: this.tipo,
+        descripcion: this.descripcion,
+        estado: this.estado 
+      }, this.fotoFile ?? undefined)
+        .subscribe({
+          next: () => { 
+            this.limpiarFormulario();
+            this.cargar(); 
+          },
+          error: (e) => { console.error('Error actualizar:', e); alert('Error al actualizar'); }
+        });
+    } else {
+      // Crear
+      this.habService.createHabitacion({ 
+        nombre: this.nombre, 
+        precio: this.precio, 
+        numero: this.numero, 
+        tipo: this.tipo,
+        descripcion: this.descripcion,
+        estado: this.estado 
+      }, this.fotoFile ?? undefined)
+        .subscribe({
+          next: () => { 
+            this.limpiarFormulario();
+            this.cargar(); 
+          },
+          error: (e) => { console.error('Error crear:', e); alert('Error al guardar'); }
+        });
+    }
+  }
+
+  editar(hab: Habitacion) {
+    this.modoEdicion = true;
+    this.id_habitacion = hab.id;
+    this.nombre = hab.nombre;
+    this.numero = hab.numero;
+    this.tipo = hab.tipo;
+    this.descripcion = hab.descripcion || '';
+    this.precio = hab.precio;
+    this.estado = hab.estado;
+    this.fotoFile = null;
+  }
+
+  cancelar() {
+    this.limpiarFormulario();
+  }
+
+  limpiarFormulario() {
+    this.modoEdicion = false;
+    this.id_habitacion = undefined;
+    this.nombre = '';
+    this.numero = 0;
+    this.tipo = '';
+    this.descripcion = '';
+    this.precio = 0;
+    this.estado = 'Disponible';
+    this.fotoFile = null;
   }
 }
