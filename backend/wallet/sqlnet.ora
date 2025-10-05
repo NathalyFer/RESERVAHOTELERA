@@ -1,0 +1,2 @@
+WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="C:\\Users\\aurac\\OneDrive\\Desktop\\sumativa1-main1\\sumativa1-main\\backend\\wallet")))
+SSL_SERVER_DN_MATCH=yes

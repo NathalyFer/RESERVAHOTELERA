@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reservas</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="irNueva()">Nueva</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="limpiarTodo()">Limpiar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="reservas.length; else vacio">
+    <ion-item *ngFor="let r of reservas">
+      <ion-label>
+        <h2>Reserva #{{ r.reserva_id }} — {{ r.estado_reserva | titlecase }}</h2>
+        <p>Cliente: {{ r.cliente_id }} | Habitación: {{ r.habitacion_id }}</p>
+        <p>Entrada: {{ r.fecha_entrada }} — Salida: {{ r.fecha_salida }}</p>
+        <p>Personas: {{ r.cantidad_personas }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #vacio>
+    <ion-text color="medium">
+      <p>No hay reservas aún. Crea la primera desde <strong>Nueva</strong>.</p>
+    </ion-text>
+  </ng-template>
+</ion-content>
