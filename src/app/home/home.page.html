@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-between">
+        <!-- Logo izquierda -->
+        <ion-col size="auto">
+          <img src="assets/img/logo.png" alt="HotelLogo" class="logo" />
+        </ion-col>
+
+        <!-- Menú derecha -->
+        <ion-col size="auto">
+          <nav class="menu">
+              <a (click)="irA('home')" class="menu-item">Home</a>
+              <a (click)="irA('reserva')" class="menu-item">Reserva</a>
+              <a (click)="irA('habitaciones')" class="menu-item">Habitación</a>
+              <a (click)="irA('contacto')" class="menu-item">Contacto</a>
+              <ion-avatar class="menu-item" (click)="irAMiCuenta()">
+                <img src="assets/img/avatar.jpg" alt="Mi cuenta" />
+              </ion-avatar>
+          </nav>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="content-grid">
+    <!-- Nombre hotel grande -->
+    <ion-row>
+      <ion-col>
+        <h1 class="hotel-name">PACIFIC REEF HOTEL</h1>
+      </ion-col>
+    </ion-row>
+
+    <!-- Oración promocional -->
+    <ion-row>
+      <ion-col>
+        <p class="promo-text">Tu escape frente al mar comienza aquí.</p>
+      </ion-col>
+    </ion-row>
+
+        <!-- Botón Reserva -->
+    <ion-row class="ion-justify-content-center ion-margin-bottom">
+      <ion-col size="auto">
+        <ion-button color="primary" routerLink="/reserva">
+          Reserva Aquí
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  <!-- Imagen fija -->
+    <img src="assets/img/vista_mar.jpg" alt="Vista al mar" style="width: 100%; height: auto;" />
+
+    <!-- Texto habitaciones premium -->
+    <ion-row>
+      <ion-col>
+        <h2 class="section-title">HABITACIONES PREMIUM</h2>
+      </ion-col>
+    </ion-row>
+
+    <!-- Tres columnas con habitaciones -->
+    <ion-row>
+      <ion-col size="12" size-md="4" *ngFor="let room of rooms">
+        <img [src]="room.img" alt="{{room.name}}" class="room-img" (click)="verHabitacion(room.name)" />
+        <p class="room-text">{{room.name}}</p>
+        <p class="room-description">{{room.desc}}</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Subtítulo propaganda -->
+    <ion-row>
+      <ion-col>
+        <h3 class="sub-prop">Descubre el lujo y confort que mereces</h3>
+      </ion-col>
+    </ion-row>
+
+    <!-- Servicios destacados -->
+      
+   <!--<ion-card class="product-card">
+        <div class="product-image-wrapper">
+          <img src="assets/img/pan_uva.png" alt="servicio1" />
+        </div>
+
+        <ion-card-content>
+          Seleccionamos lo mejor para ti, por que cada detalle importa.
+        </ion-card-content>
+      </ion-card>
+
+        <ion-card class="product-card">
+        <div class="product-image-wrapper">
+          <img src="assets/img/vino_melon.png" alt="servicio2" />
+        </div>
+
+        <ion-card-content>
+          Lo mejor de nuestra tierra, en cada bocado.
+        </ion-card-content>
+      </ion-card>
+      -->
+
+          <!-- Dos columnas con servicios -->
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let service of services">
+        <img [src]="service.img" alt="{{service.name}}" class="service-img" />
+        <p class="service-text">{{service.desc}}</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Título reseñas -->
+    <ion-row>
+      <ion-col>
+        <h2 class="section-title">Reseñas</h2>
+      </ion-col>
+    </ion-row>
+
+    <!-- Tres columnas con reseñas -->
+    <ion-row>
+      <ion-col size="12" size-md="4" *ngFor="let review of reviews" class="review-col">
+        <ion-avatar>
+          <img [src]="review.avatar" alt="Avatar {{review.name}}" />
+        </ion-avatar>
+        <p class="review-text">{{review.text}}</p>
+        <p class="review-name">{{review.name}}</p>
+      </ion-col>
+    </ion-row>
+
+    <!-- Línea separadora -->
+    <ion-row>
+      <ion-col>
+        <hr class="footer-divider" />
+      </ion-col>
+    </ion-row>
+
+    <!-- Footer -->
+    <ion-row class="footer-section">
+      <!-- Columna izquierda: Encuéntranos y Redes Sociales -->
+      <ion-col size="12" size-md="6" class="footer-left">
+        <h3 class="footer-title">Encuéntranos</h3>
+        <div class="social-icons">
+          <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+          <ion-icon name="logo-youtube" class="social-icon"></ion-icon>
+          <ion-icon name="logo-instagram" class="social-icon"></ion-icon>
+          <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+        </div>
+      </ion-col>
+
+      <!-- Columna derecha: Información de contacto -->
+      <ion-col size="12" size-md="6" class="footer-right">
+        <div class="contact-info">
+          <!-- Teléfonos -->
+          <div class="contact-item">
+            <ion-icon name="call-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>+56 9 5552 2255</p>
+              <p>+56 9 5557 7788</p>
+              <p>+56 9 4777 4211</p>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="contact-item">
+            <ion-icon name="location-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>Avenida San Martín</p>
+              <p>18875</p>
+              <p>Viña del Mar</p>
+            </div>
+          </div>
+
+          <!-- Correo -->
+          <div class="contact-item">
+            <ion-icon name="mail-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>reserva@hotelpacificreef.com</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

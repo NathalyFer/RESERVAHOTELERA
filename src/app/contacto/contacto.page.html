@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-between">
+        <!-- Logo izquierda -->
+        <ion-col size="auto">
+          <img src="assets/img/logo.png" alt="HotelLogo" class="logo" />
+        </ion-col>
+
+        <!-- Menú derecha -->
+        <ion-col size="auto">
+          <nav class="menu">
+              <a (click)="irA('home')" class="menu-item">Home</a>
+              <a (click)="irA('reserva')" class="menu-item">Reserva</a>
+              <a (click)="irA('habitacion')" class="menu-item">Habitación</a>
+              <a (click)="irA('contacto')" class="menu-item">Contacto</a>
+            <ion-avatar class="menu-item">
+              <img src="assets/img/avatar.jpg" alt="Mi cuenta" />
+            </ion-avatar>
+          </nav>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <!-- Nombre hotel grande -->
+    <ion-row>
+      <ion-col>
+        <h1 class="hotel-name">PACIFIC REEF HOTEL</h1>
+        <p>Más que un hotel, somos un lugar para desconectar, respirar y reconocer con lo esencial. Nacimos junto al mar, con el sueño de ofrecer un espacio acogedor donde cada visita se sienta como volver a casa. Aquí, cada amanecer tiene sabor a calma y cada detalle está pensado para que te relajes y disfrutes. Te esperamos frente al Pacifico.</p>
+      </ion-col>
+    </ion-row>
+
+     <!-- Imagen fija -->
+     <ion-row>
+        <ion-col>
+          <img src="assets/img/playa.jpg" alt="playa" style="width: 100%; height: auto;" />
+        </ion-col>
+      </ion-row>
+  
+     <!-- Contáctanos -->
+    <ion-row>
+      <ion-col>
+         <h3 class="sub-prop">Contáctanos</h3>
+      </ion-col>
+    </ion-row>
+
+    <!-- Formulario de contacto -->
+
+    <form [formGroup]="contactoForm" (ngSubmit)="enviarFormulario()">
+
+        <ion-item [class.invalid]="nombre.invalid && nombre.touched">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="nombre.invalid && nombre.touched">
+          El nombre es requerido y debe tener al menos 2 letras.
+        </ion-note>
+
+        <ion-item [class.invalid]="apellido.invalid && apellido.touched">
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input type="text" formControlName="apellido"></ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="apellido.invalid && apellido.touched">
+          El apellido es requerido y debe tener al menos 2 letras.
+        </ion-note>
+
+        <ion-item [class.invalid]="correo.invalid && correo.touched">
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input type="email" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-note color="danger" *ngIf="correo.invalid && correo.touched">
+          Ingresa un correo válido.
+        </ion-note>
+
+        <ion-item [class.invalid]="mensaje.invalid && mensaje.touched">
+          <ion-label position="floating">Mensaje</ion-label>
+          <ion-textarea formControlName="mensaje"></ion-textarea>
+        </ion-item>
+        <ion-note color="danger" *ngIf="mensaje.invalid && mensaje.touched">
+          El mensaje debe tener al menos 10 caracteres.
+        </ion-note>
+
+        <ion-button expand="block" type="submit" [disabled]="contactoForm.invalid">
+          Enviar
+        </ion-button>
+
+      </form>
+
+
+<!-- Línea separadora -->
+    <ion-row>
+      <ion-col>
+        <hr class="footer-divider" />
+      </ion-col>
+    </ion-row>
+
+    <!-- Footer -->
+    <ion-row class="footer-section">
+      <!-- Columna izquierda: Encuéntranos y Redes Sociales -->
+      <ion-col size="12" size-md="6" class="footer-left">
+        <h3 class="footer-title">Encuéntranos</h3>
+        <div class="social-icons">
+          <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+          <ion-icon name="logo-youtube" class="social-icon"></ion-icon>
+          <ion-icon name="logo-instagram" class="social-icon"></ion-icon>
+          <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+        </div>
+      </ion-col>
+
+      <!-- Columna derecha: Información de contacto -->
+      <ion-col size="12" size-md="6" class="footer-right">
+        <div class="contact-info">
+          <!-- Teléfonos -->
+          <div class="contact-item">
+            <ion-icon name="call-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>+56 9 5552 2255</p>
+              <p>+56 9 5557 7788</p>
+              <p>+56 9 4777 4211</p>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="contact-item">
+            <ion-icon name="location-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>Avenida San Martín</p>
+              <p>18875</p>
+              <p>Viña del Mar</p>
+            </div>
+          </div>
+
+          <!-- Correo -->
+          <div class="contact-item">
+            <ion-icon name="mail-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>reserva@hotelpacificreef.com</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+ 
+
