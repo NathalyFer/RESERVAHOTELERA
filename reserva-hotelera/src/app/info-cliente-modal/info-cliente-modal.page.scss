@@ -1,0 +1,99 @@
+:host {
+  display: block;
+  height: 100%;
+  background-image: url('/assets/img/fondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+ion-modal {
+  --background: transparent;
+}
+
+ion-header {
+  --background: transparent;
+  --ion-toolbar-background: transparent;
+  --ion-toolbar-border-color: transparent;
+}
+
+.transparent-header {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+ion-toolbar {
+  text-align: center;
+}
+
+ion-title.center-title {
+  color: #57195b;
+  font-weight: bold;
+  font-size: 1.7em;
+  padding-top: 15px;
+}
+
+.custom-back-button {
+  --color: #57195b;
+  --background: transparent;
+  font-size: 1em;
+  padding-top: 15px;
+}
+
+/* Estilo de la tarjeta dentro del modal */
+ion-card {
+  background-color: transparent;
+  backdrop-filter: blur(5px);
+  box-shadow: none;
+  border-radius: 5%;
+  margin: 10% auto;
+  width: 90%;
+}
+
+.modal-box {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 20px auto;
+  backdrop-filter: blur(4px);
+  color: #333;
+}
+
+/* Estilo del contenido de texto */
+.modal-box p {
+  font-size: 1.1em;
+  color: rgb(122, 40, 163);
+  margin-bottom: 10px;
+}
+
+.modal-box strong {
+  color: #21a1a1;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .modal-box {
+    margin: 10px;
+    padding: 16px;
+  }
+
+  ion-title.center-title {
+    font-size: 1.3em;
+  }
+
+  .modal-box p {
+    font-size: 1em;
+  }
+}
+.titulo-modal {
+  color: #57195b; // Cambialo por cualquier color que quieras
+  font-weight: bold;
+  font-size: 1.1m;
+}
+ion-content {
+  --background: transparent;
+}

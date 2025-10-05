@@ -1,0 +1,7 @@
+{
+  "name": "reserva-hotelera",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
