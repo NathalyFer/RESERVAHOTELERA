@@ -17,8 +17,7 @@
 /package-lock.json
 yarn.lock
 
-# Environment files
-/.env
+
 
 # TypeScript cache
 *.tsbuildinfo
@@ -73,11 +72,3 @@ $RECYCLE.BIN/
 # Bazel
 /bazel-out
 
-# Backend - Variables de entorno (NO subir credenciales)
-backend/.env
-backend/__pycache__/
-backend/*.pyc
-
-# Auth0 y configuraciones sensibles
-# src/environments/environment.ts
-# src/environments/environment.prod.ts
