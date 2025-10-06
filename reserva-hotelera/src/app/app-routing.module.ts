@@ -15,10 +15,19 @@ const routes: Routes = [
     path: 'contacto',
     loadChildren: () => import('./contacto/contacto.module').then( m => m.ContactoPageModule)
   },
+  { 
+    path: 'habitaciones',
+    loadChildren: () => import('./habitaciones/habitaciones.module').then( m => m.HabitacionesPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)  
+  },
   {
     path: 'mi-cuenta',
     loadChildren: () => import('./mi-cuenta/mi-cuenta.module').then( m => m.MiCuentaPageModule)
-  },  {
+  },
+  {
     path: 'info-cliente-modal',
     loadChildren: () => import('./info-cliente-modal/info-cliente-modal.module').then( m => m.InfoClienteModalPageModule)
   },

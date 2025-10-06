@@ -29,7 +29,7 @@ export class LoginPage {
     this.menu.enable(true, 'mainMenu');
     
     // Escuchar cuando Auth0 complete la autenticación y redirigir al home
-    this.auth.isAuthenticated$.subscribe((isAuthenticated) => {
+    this.auth.isAuthenticated$.subscribe((isAuthenticated: boolean) => {
       if (isAuthenticated) {
         // Redirigir al home después del login exitoso con Auth0
         this.navCtrl.navigateRoot('/home');

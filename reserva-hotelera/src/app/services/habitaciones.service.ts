@@ -16,7 +16,7 @@ export interface Habitacion {
 
 @Injectable({ providedIn: 'root' })
 export class HabitacionesService {
-  private base = 'http://127.0.0.1:8000';
+  private base = 'http://127.0.0.1:3001/api';
 
   constructor(private http: HttpClient) {}
 
