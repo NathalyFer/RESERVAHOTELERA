@@ -32,16 +32,29 @@ ion-header {
 }
 
 .menu-item {
-  color: var(--color-calipso);
+  --color: var(--color-calipso);
+  --background: transparent;
+  --box-shadow: none;
   font-weight: 600;
   font-size: 1rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  text-transform: none;
+  margin: 0 4px;
+  transition: all 0.3s ease;
 }
 
 .menu-item:hover {
-  color: var(--color-azul-oscuro);
+  --color: var(--color-azul-oscuro);
+  --background: rgba(0, 188, 212, 0.1);
+}
+
+/* Estilos adicionales para los botones del menú */
+.menu ion-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 4px;
+  --padding-bottom: 4px;
+  height: auto;
+  min-height: 36px;
 }
 
 .menu ion-avatar img {
@@ -55,6 +68,68 @@ ion-header {
 
 .menu ion-avatar img:hover {
   transform: scale(1.1);
+}
+
+/* Estilos para el botón de cerrar sesión */
+.menu-item.cerrar-sesion {
+  --color: var(--color-calipso);
+  --background: transparent;
+  --box-shadow: none;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: none;
+  margin: 0 4px 0 10px;
+  transition: all 0.3s ease;
+}
+
+.menu-item.cerrar-sesion:hover {
+  --color: var(--color-azul-oscuro);
+  --background: rgba(0, 188, 212, 0.1);
+}
+
+.menu-item.cerrar-sesion ion-icon {
+  font-size: 1.2rem;
+  margin-right: 4px;
+}
+
+/* Responsive para el menú */
+@media (max-width: 768px) {
+  .menu {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .menu-item {
+    font-size: 0.85rem;
+    margin: 0 2px;
+  }
+  
+  .menu-item.cerrar-sesion {
+    margin: 0 2px 0 5px;
+  }
+  
+  .logo {
+    width: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu {
+    gap: 8px;
+  }
+  
+  .menu-item {
+    font-size: 0.75rem;
+    margin: 0 1px;
+  }
+  
+  .menu-item.cerrar-sesion {
+    margin: 0 1px 0 3px;
+  }
+  
+  .logo {
+    width: 60px;
+  }
 }
 
 /* ===== Formulario (ion-card) ===== */

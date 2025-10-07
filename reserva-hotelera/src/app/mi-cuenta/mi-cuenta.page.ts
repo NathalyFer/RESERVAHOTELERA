@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-// Update the path below to the correct relative path if needed
-import { InfoClienteModalPage } from '../info-cliente-modal/info-cliente-modal.page';
 
 
 @Component({
@@ -27,20 +25,22 @@ export class MiCuentaPage  {
   constructor(
     private modalCtrl: ModalController,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
   }
 
-   // Navegación a otras rutas
-  irA(ruta: string) {
-    this.router.navigate([`/${ruta}`]);
+   //  Navegación por menú
+  irA(pagina: string) {
+    this.navCtrl.navigateForward(`/${pagina}`);
   }
+
 
   cerrarSesion() {
     console.log('Cerrando sesión...');
-    this.router.navigate(['/login']);
+    this.navCtrl.navigateForward('/login');
   }
 
   modificar() {
@@ -99,10 +99,7 @@ if (!passwordRegex.test(this.password)) {
   return;
 }
 
-//  Si todo está bien, guardarDatos()
-//this.guardarDatos();
-
-// Guardado exitoso
+//  Si todo está bien, mostrar el modal
     console.log('Datos guardados:', {
       nombre: this.nombre,
       email: this.email,
@@ -112,6 +109,9 @@ if (!passwordRegex.test(this.password)) {
       password: this.password
     });
 
+    // Mostrar el modal de información del cliente
+    this.abrirModal();
+
 // Restablecer el estado para permitir futuras ejecuciones
 setTimeout(() => {
   this.animationState = '';
@@ -119,24 +119,29 @@ setTimeout(() => {
 
 }
 
-//Método para abril el modal
+//Método para abrir el modal
 async abrirModal() {
   this.animationState = 'visible'; // Cambia el estado de la animación
-  // Aquí puedes agregar la lógica para abrir el modal
-  const modal = await this.modalCtrl.create({
-    component: InfoClienteModalPage,
-    componentProps: {
-      nombre: this.nombre,
-      email: this.email,
-      telefono: this.telefono,
-      direccion: this.direccion,
-      username: this.username,
-      password: this.password,
-    },
-    cssClass: 'modal-card'
+  
+  // Crear el mensaje HTML correctamente
+  const mensaje = `
+    <div style="text-align: left; font-family: Arial, sans-serif;">
+      <p><strong>Nombre:</strong> ${this.nombre || 'No especificado'}</p>
+      <p><strong>Email:</strong> ${this.email || 'No especificado'}</p>
+      <p><strong>Teléfono:</strong> ${this.telefono || 'No especificado'}</p>
+      <p><strong>Dirección:</strong> ${this.direccion || 'No especificado'}</p>
+      <p><strong>Usuario:</strong> ${this.username || 'No especificado'}</p>
+      <p><strong>Contraseña:</strong> ${this.password || 'No especificado'}</p>
+    </div>
+  `;
+  
+  const alert = await this.alertController.create({
+    header: 'Información del Cliente',
+    message: mensaje,
+    buttons: ['Cerrar']
   });
 
-  await modal.present();
+  await alert.present();
 }
 
   // Método para cerrar el modal
