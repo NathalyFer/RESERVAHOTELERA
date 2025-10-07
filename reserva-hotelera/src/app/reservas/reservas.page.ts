@@ -49,6 +49,12 @@ export class ReservasPage {
 
   irListado() { this.nav.navigateForward('/lista-reservas'); }
 
+  // Navegación por menú
+  irA(pagina: string) {
+    console.log('Navegando a:', pagina);
+    this.nav.navigateForward(`/${pagina}`);
+  }
+
   private async present(message: string) {
     const t = await this.toast.create({ message, duration: 1800, position: 'bottom' });
     t.present();

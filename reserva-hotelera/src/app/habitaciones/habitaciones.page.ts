@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HabitacionesService, Habitacion } from '../services/habitaciones.service';
 import { DataService } from '../services/data.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-habitaciones',
@@ -24,7 +25,8 @@ export class HabitacionesPage implements OnInit {
 
   constructor(
     private habService: HabitacionesService,
-    private dataService: DataService
+    private dataService: DataService,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() { 
@@ -116,5 +118,11 @@ export class HabitacionesPage implements OnInit {
     this.precio = 0;
     this.estado = 'Disponible';
     this.fotoFile = null;
+  }
+
+  // Navegación por menú
+  irA(pagina: string) {
+    console.log('Navegando a:', pagina);
+    this.navCtrl.navigateForward(`/${pagina}`);
   }
 }

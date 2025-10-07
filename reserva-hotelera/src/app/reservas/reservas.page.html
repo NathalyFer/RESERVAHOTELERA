@@ -1,12 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear Reserva</ion-title>
-    <ion-buttons slot="end">
-      <ion-button routerLink="/lista-reservas">
-        <ion-icon name="list-outline" slot="start"></ion-icon>
-        Ver reservas
-      </ion-button>
-    </ion-buttons>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-between">
+        <!-- Logo izquierda -->
+        <ion-col size="auto">
+          <img src="assets/img/logo.png" alt="HotelLogo" class="logo" />
+        </ion-col>
+
+        <!-- Menú derecha -->
+        <ion-col size="auto">
+          <nav class="menu">
+              <a (click)="irA('home')" class="menu-item">Home</a>
+              <a (click)="irA('reservas')" class="menu-item">Reserva</a>
+              <a (click)="irA('habitaciones')" class="menu-item">Habitaciones</a>
+              <a (click)="irA('contacto')" class="menu-item">Contacto</a>
+              <ion-avatar class="menu-item" (click)="irA('login')">
+                <img src="assets/img/avatar.jpg" alt="Mi cuenta" />
+              </ion-avatar>
+          </nav>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
@@ -177,5 +191,59 @@
         </form>
       </ion-card-content>
     </ion-card>
+
+    <!-- Línea separadora -->
+    <ion-row>
+      <ion-col>
+        <hr class="footer-divider" />
+      </ion-col>
+    </ion-row>
+
+    <!-- Footer -->
+    <ion-row class="footer-section">
+      <!-- Columna izquierda: Encuéntranos y Redes Sociales -->
+      <ion-col size="12" size-md="6" class="footer-left">
+        <h3 class="footer-title">Encuéntranos</h3>
+        <div class="social-icons">
+          <ion-icon name="logo-facebook" class="social-icon"></ion-icon>
+          <ion-icon name="logo-youtube" class="social-icon"></ion-icon>
+          <ion-icon name="logo-instagram" class="social-icon"></ion-icon>
+          <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+        </div>
+      </ion-col>
+
+      <!-- Columna derecha: Información de contacto -->
+      <ion-col size="12" size-md="6" class="footer-right">
+        <div class="contact-info">
+          <!-- Teléfonos -->
+          <div class="contact-item">
+            <ion-icon name="call-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>+56 9 5552 2255</p>
+              <p>+56 9 5557 7788</p>
+              <p>+56 9 4777 4211</p>
+            </div>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="contact-item">
+            <ion-icon name="location-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>Avenida San Martín</p>
+              <p>18875</p>
+              <p>Viña del Mar</p>
+            </div>
+          </div>
+
+          <!-- Correo -->
+          <div class="contact-item">
+            <ion-icon name="mail-outline" class="contact-icon"></ion-icon>
+            <div class="contact-details">
+              <p>reserva@hotelpacificreef.com</p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>
