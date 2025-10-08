@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@auth0/auth0-angular": "^2.3.0",
+    "@capacitor/preferences": "^7.0.2",
+    "swiper": "^12.0.2"
+  }
+}
