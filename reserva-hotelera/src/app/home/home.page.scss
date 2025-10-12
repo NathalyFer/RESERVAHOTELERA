@@ -637,3 +637,11 @@ ion-avatar img {
     font-size: 0.8rem;
   }
 }
+ion-content {
+  --padding-top: 1px; // o 0 si lo quieres pegado al header
+}
+
+.content-grid {
+  margin-top: 0;     // Elimina separación vertical superior
+  padding-top: 0;    // También elimina el relleno si lo hubiera
+}

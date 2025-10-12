@@ -14,7 +14,6 @@ export class InfoClienteModalPage  {
   @Input() email!: any;
   @Input() telefono!: any;
   @Input() direccion!: any;
-  @Input() username!: any;
   @Input() password!: any;
 
   constructor( private modalCtrl: ModalController) { }

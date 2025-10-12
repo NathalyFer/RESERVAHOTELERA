@@ -3,7 +3,7 @@ import { ModalController, AlertController,  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { trigger, transition, style, animate } from '@angular/animations';
-
+import { InfoClienteModalPage } from '../info-cliente-modal/info-cliente-modal.page';
 
 @Component({
   selector: 'app-mi-cuenta',
@@ -24,16 +24,27 @@ import { trigger, transition, style, animate } from '@angular/animations';
 })
 export class MiCuentaPage  {
 
-  // Declaración de variables para los campos del formulario
-  nombre: any = '';
-  email: any = '';
-  telefono: any = '';
-  direccion: any = ''
-  username: any = '';
-  password: any = '';
+  // Variables de formulario
+  nombre: string = '';
+  email: string = '';
+  telefono: string = '';
+  direccion: string = '';
+  password: string = '';
 
-  animationState: string = '';
+  // Flags para controlar errores y touch
   nombreTouched = false;
+  emailTouched = false;
+  telefonoTouched = false;
+  direccionTouched = false;
+  passwordTouched = false;
+
+  // Variables para errores
+  nombreError = '';
+  emailError = '';
+  telefonoError = '';
+  direccionError = '';
+  passwordError = '';
+  animationState: string = '';
 
   constructor(
       private modalCtrl: ModalController,
@@ -57,6 +68,78 @@ export class MiCuentaPage  {
   }
 }
 
+ // Validación para cada campo
+  validarNombre() {
+    this.nombreTouched = true;
+    if (!this.nombre.trim()) {
+      this.nombreError = 'El nombre no puede estar vacío.';
+      return false;
+    }
+    this.nombreError = '';
+    return true;
+  }
+
+  validarEmail() {
+    this.emailTouched = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!this.email.trim()) {
+      this.emailError = 'El email es obligatorio.';
+      return false;
+    } else if (!emailRegex.test(this.email)) {
+      this.emailError = 'El correo no tiene un formato válido.';
+      return false;
+    }
+    this.emailError = '';
+    return true;
+  }
+
+  validarTelefono() {
+    this.telefonoTouched = true;
+    if (!this.telefono.trim()) {
+      this.telefonoError = 'El teléfono es obligatorio.';
+      return false;
+    }
+    this.telefonoError = '';
+    return true;
+  }
+
+  validarDireccion() {
+    this.direccionTouched = true;
+    if (!this.direccion.trim()) {
+      this.direccionError = 'La dirección es obligatoria.';
+      return false;
+    }
+    this.direccionError = '';
+    return true;
+  }
+
+
+
+  validarPassword() {
+    this.passwordTouched = true;
+    const passwordRegex = /^[0-9]{4}$/;
+    if (!this.password.trim()) {
+      this.passwordError = 'La contraseña es obligatoria.';
+      return false;
+    } else if (!passwordRegex.test(this.password)) {
+      this.passwordError = 'La contraseña debe tener exactamente 4 dígitos numéricos.';
+      return false;
+    }
+    this.passwordError = '';
+    return true;
+  }
+
+   // Validar todo el formulario
+  validarFormulario() {
+    const nombreValido = this.validarNombre();
+    const emailValido = this.validarEmail();
+    const telefonoValido = this.validarTelefono();
+    const direccionValido = this.validarDireccion();
+    const passwordValido = this.validarPassword();
+
+    return nombreValido && emailValido && telefonoValido && direccionValido && passwordValido;
+  }
+
    //  Ver detalle de habitación
   verHabitacion(roomName: string) {
     this.navCtrl.navigateForward(['/habitaciones1'], {
@@ -79,102 +162,49 @@ export class MiCuentaPage  {
      await alert.present();
   }
 
-guardar() {
+  // Guardar solo si todo es válido
+  guardar() {
+    if (!this.validarFormulario()) {
+      // No mostrar alert, los errores ya se muestran inline
+      return;
+    }
 
-
-// Validar campos vacíos
-if (
-  !this.nombre ||
-  !this.email ||
-  !this.telefono ||
-  !this.direccion ||
-  !this.username ||
-  !this.password
-) {
-  this.mostrarAlerta('Por favor, complete todos los campos.');
-  return;
-}
-
-// Validar longitud del nombre
-if (this.nombre.trim().length === 0) {
-  this.mostrarAlerta('El nombre no puede estar vacío.');
-  return;
-}
-
-// Validar formato del correo
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!emailRegex.test(this.email)) {
-  this.mostrarAlerta('El correo no tiene un formato válido.');
-  return;
-}
-
-// Validar nombre de usuario (3-8 caracteres)
-if (this.username.length < 3 || this.username.length > 8) {
-  this.mostrarAlerta('El usuario debe tener entre 3 y 8 caracteres.');
-  return;
-}
-
-// Validar contraseña: exactamente 4 dígitos numéricos
-const passwordRegex = /^[0-9]{4}$/;
-if (!passwordRegex.test(this.password)) {
-  this.mostrarAlerta('La contraseña debe tener exactamente 4 dígitos numéricos.');
-  return;
-}
-
-//  Si todo está bien, mostrar el modal
+    // Si pasa validación, abrir modal etc.
     console.log('Datos guardados:', {
       nombre: this.nombre,
       email: this.email,
       telefono: this.telefono,
       direccion: this.direccion,
-      username: this.username,
       password: this.password
     });
 
-    // Mostrar el modal de información del cliente
     this.abrirModal();
 
-// Restablecer el estado para permitir futuras ejecuciones
-setTimeout(() => {
-  this.animationState = '';
-}, 1100); // debe ser un poco más que 1s para permitir reinicio
+    setTimeout(() => {
+      this.animationState = '';
+    }, 1100);
+  }
 
-}
-
-//Método para abrir el modal
 async abrirModal() {
-  this.animationState = 'visible'; // Cambia el estado de la animación
-  
-  // Crear el mensaje HTML correctamente
-  const mensaje = `
-    <div style="text-align: left; font-family: Arial, sans-serif;">
-      <p><strong>Nombre:</strong> ${this.nombre || 'No especificado'}</p>
-      <p><strong>Email:</strong> ${this.email || 'No especificado'}</p>
-      <p><strong>Teléfono:</strong> ${this.telefono || 'No especificado'}</p>
-      <p><strong>Dirección:</strong> ${this.direccion || 'No especificado'}</p>
-      <p><strong>Usuario:</strong> ${this.username || 'No especificado'}</p>
-      <p><strong>Contraseña:</strong> ${this.password || 'No especificado'}</p>
-    </div>
-  `;
-  
-  const alert = await this.alertController.create({
-    header: 'Información del Cliente',
-    message: mensaje,
-    buttons: ['Cerrar']
+  const modal = await this.modalCtrl.create({
+    component: InfoClienteModalPage,
+    componentProps: {
+      nombre: this.nombre,
+      email: this.email,
+      telefono: this.telefono,
+      direccion: this.direccion,
+      password: this.password
+    }
   });
 
-  await alert.present();
+  await modal.present();
+}
+  cerrarModal() {
+    this.modalCtrl.dismiss();
+  }
+
+  
 }
 
-  // Método para cerrar el modal
-  async cerrarModal() {
-    this.animationState = 'animateSlide'; // Cambia el estado de la animación
-    const modal = await this.modalCtrl.getTop();
-    if (modal) {
-      await modal.dismiss();
-    }
-  this.animationState = ''; // Restablece el estado de la animación
-  
 
 
-  }}

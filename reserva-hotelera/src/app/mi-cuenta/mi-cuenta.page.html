@@ -5,41 +5,47 @@
 
   <!-- Formulario -->
   <ion-card class="card-registrarse">
-    <ion-card-content>
+  <ion-card-content>
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Nombre:" type="text" placeholder="Nombre completo" [(ngModel)]="nombre"></ion-input>
-      </ion-item>
+    <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Nombre:" type="text" placeholder="Nombre completo" [(ngModel)]="nombre" (ionBlur)="validarNombre()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="nombreTouched && nombreError">{{ nombreError }}</p>
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Email:" type="text" placeholder="xxx@xxxx.com" [(ngModel)]="email"></ion-input>
-      </ion-item>
+    <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Email:" type="text" placeholder="xxx@xxxx.com" [(ngModel)]="email" (ionBlur)="validarEmail()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="emailTouched && emailError">{{ emailError }}</p>
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Telefono:" type="text" placeholder="Telefono" [(ngModel)]="telefono"></ion-input>
-      </ion-item>
+    <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Telefono:" type="text" placeholder="Telefono" [(ngModel)]="telefono" (ionBlur)="validarTelefono()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="telefonoTouched && telefonoError">{{ telefonoError }}</p>
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Direccion:" type="text" placeholder="Dirección" [(ngModel)]="direccion"></ion-input>
-      </ion-item>
+    <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Direccion:" type="text" placeholder="Dirección" [(ngModel)]="direccion" (ionBlur)="validarDireccion()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="direccionTouched && direccionError">{{ direccionError }}</p>
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Usuario:" type="text" placeholder="Ingresa un usuario" [(ngModel)]="username"></ion-input>
-      </ion-item>
+    <!-- <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Usuario:" type="text" placeholder="Ingresa un usuario" [(ngModel)]="username" (ionBlur)="validarUsername()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="usernameTouched && usernameError">{{ usernameError }}</p> -->
 
-      <ion-item [@slideAnimation]="animationState">
-        <ion-input label="Contraseña:" type="password" placeholder="••••" [(ngModel)]="password" ></ion-input>
-      </ion-item>
+    <ion-item [@slideAnimation]="animationState">
+      <ion-input label="Contraseña:" type="password" placeholder="••••" [(ngModel)]="password" (ionBlur)="validarPassword()"></ion-input>
+    </ion-item>
+    <p class="error-message" *ngIf="passwordTouched && passwordError">{{ passwordError }}</p>
 
-      <div class="button-row">
-        <ion-button class="btn-green btn-left" (click)="modificar()">Modificar</ion-button>
-      </div> 
+    <div class="button-row">
+      <ion-button class="btn-calipso btn-left" (click)="modificar()">Modificar</ion-button>
+    </div> 
 
-      <div class="guardar">
-        <ion-button class="btn-green btn-guardar" expand="block" (click)="guardar()">Guardar</ion-button>
-      </div>
+    <div class="guardar">
+      <ion-button class="btn-calipso btn-guardar" expand="block" (click)="guardar()">Guardar</ion-button>
+    </div>
 
-    </ion-card-content>
-  </ion-card>
+  </ion-card-content>
+</ion-card>
 
 </ion-content>

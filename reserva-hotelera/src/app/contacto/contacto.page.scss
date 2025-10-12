@@ -315,3 +315,13 @@ ion-item.invalid {
   --highlight-color-focused: var(--ion-color-danger);
   --border-color: var(--ion-color-danger);
 }
+
+ion-content {
+  --padding-top: 8px;
+  padding-inline: 16px;
+}
+
+.content-grid {
+  margin-top: 0;
+  padding-top: 0;
+}
