@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HabitacionesService, Habitacion } from '../services/habitaciones.service';
 import { DataService } from '../services/data.service';
-/*import { NavController } from '@ionic/angular';*/
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-habitaciones',
-  templateUrl: './habitaciones.page.html',
-  styleUrls: ['./habitaciones.page.scss'],
+  selector: 'app-habitaciones1',
+  templateUrl: './habitaciones1.page.html',
+  styleUrls: ['./habitaciones1.page.scss'],
   standalone: false
 })
-export class HabitacionesPage implements OnInit {
+export class Habitaciones1Page implements OnInit {
   habitaciones: Habitacion[] = [];
   id_habitacion?: number; 
   nombre = '';
@@ -27,8 +26,7 @@ export class HabitacionesPage implements OnInit {
   constructor(
     private habService: HabitacionesService,
     private dataService: DataService,
-    /*private navCtrl: NavController*/
-    private router: Router
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() { 
@@ -36,20 +34,44 @@ export class HabitacionesPage implements OnInit {
     this.isAdmin = this.dataService.isAdmin();
   }
 
-  cargar() {
+ /* cargar() {
     this.habService.getHabitaciones().subscribe({
       next: (data) => {
         this.habitaciones = data;
         console.log('Habitaciones cargadas', data);
+        console.log('Total habitaciones:', this.habitaciones.length);
       },
-      error: (err) => console.error('Error al cargar', err)
-    });
-  }
-
-   reservar(hab: Habitacion) {
-    console.log('Ir a reservas con:', hab);
-    this.router.navigate(['/reservas'], { state: { habitacion: hab } });
-  }
+       error: (err) => {
+      console.error('❌ Error al cargar habitaciones:', err);
+      alert('Error al cargar habitaciones. Revisa la consola.');
+    }
+  });
+}*/
+cargar() {
+  this.habitaciones = [
+    {
+      id: 1,
+      nombre: 'Suite Premium',
+      numero: 101,
+      tipo: 'Suite',
+      descripcion: 'Amplia habitación con vista al mar.',
+      precio: 120000,
+      estado: 'Disponible',
+      foto: null
+    },
+    {
+      id: 2,
+      nombre: 'Habitación Doble',
+      numero: 102,
+      tipo: 'Doble',
+      descripcion: 'Ideal para parejas o amigos.',
+      precio: 85000,
+      estado: 'Ocupada',
+      foto: null
+    }
+  ];
+  console.log('Datos de prueba cargados');
+}
 
   loadHabitaciones() {
     this.cargar();
@@ -125,5 +147,11 @@ export class HabitacionesPage implements OnInit {
     this.precio = 0;
     this.estado = 'Disponible';
     this.fotoFile = null;
+  }
+
+  // Navegación por menú
+  irA(pagina: string) {
+    console.log('Navegando a:', pagina);
+    this.navCtrl.navigateForward(`/${pagina}`);
   }
 }

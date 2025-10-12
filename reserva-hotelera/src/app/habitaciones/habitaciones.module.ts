@@ -8,9 +8,13 @@ import { HabitacionesPageRoutingModule } from './habitaciones-routing.module';
 
 import { HabitacionesPage } from './habitaciones.page';
 
+import { SharedModule } from '../shared/chared.module';
+
+
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     HabitacionesPageRoutingModule

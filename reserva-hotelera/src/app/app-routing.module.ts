@@ -35,6 +35,19 @@ const routes: Routes = [
     path: 'reservas',
     loadChildren: () => import('./reservas/reservas.module').then( m => m.ReservasPageModule)
   },
+  {
+    path: 'habitaciones1',
+    loadChildren: () => import('./habitaciones1/habitaciones1.module').then( m => m.Habitaciones1PageModule)
+  },  {
+    path: 'prueba.',
+    loadChildren: () => import('./prueba./prueba..module').then( m => m.PruebaPageModule)
+  },
+  {
+    path: 'cuenta',
+    loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },
+
+
 
 ];
 

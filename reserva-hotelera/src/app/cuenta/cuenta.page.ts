@@ -2,29 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController,  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
-import { trigger, transition, style, animate } from '@angular/animations';
-
 
 @Component({
-  selector: 'app-mi-cuenta',
-  templateUrl: './mi-cuenta.page.html',
-  styleUrls: ['./mi-cuenta.page.scss'],
+  selector: 'app-cuenta',
+  templateUrl: './cuenta.page.html',
+  styleUrls: ['./cuenta.page.scss'],
   standalone: false,
-   animations: [
-    trigger('slideAnimation', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate('500ms ease-out', style({ transform: 'translateX(0)', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('300ms ease-in', style({ transform: 'translateX(100%)', opacity: 0 })),
-      ]),
-    ])
-  ]
 })
-export class MiCuentaPage  {
+export class CuentaPage  {
 
-  // Declaración de variables para los campos del formulario
+   // Declaración de variables para los campos del formulario
   nombre: any = '';
   email: any = '';
   telefono: any = '';

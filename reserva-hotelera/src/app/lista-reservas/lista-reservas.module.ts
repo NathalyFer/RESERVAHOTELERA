@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListaReservasPageRoutingModule } from './lista-reservas-routing.module';
 import { ListaReservasPage } from './lista-reservas.page';
+import { SharedModule } from '../shared/chared.module';
 
 @NgModule({
   
-  imports: [CommonModule, FormsModule, IonicModule, ListaReservasPageRoutingModule],
+  imports: [CommonModule, FormsModule, IonicModule, SharedModule, ListaReservasPageRoutingModule],
   declarations: [ListaReservasPage],
   
 })

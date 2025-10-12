@@ -1,72 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row class="ion-align-items-center ion-justify-content-between">
-        <!-- Logo izquierda -->
-        <ion-col size="auto">
-          <img src="assets/img/logo.png" alt="HotelLogo" class="logo" />
-        </ion-col>
+<ion-content>
 
-        <!-- Menú derecha -->
-        <ion-col size="auto">
-          <nav class="menu">
-              <ion-button fill="clear" (click)="irA('home')" class="menu-item">Home</ion-button>
-              <ion-button fill="clear" (click)="irA('reservas')" class="menu-item">Reservas</ion-button>
-              <ion-button fill="clear" (click)="irA('habitaciones')" class="menu-item">Habitaciones</ion-button>
-              <ion-button fill="clear" (click)="irA('contacto')" class="menu-item">Contacto</ion-button>
-              <ion-avatar class="menu-item" (click)="irA('login')">
-                <img src="assets/img/avatar.jpg" alt="Mi cuenta" />
-              </ion-avatar>
-              <ion-button fill="clear" (click)="cerrarSesion()" class="menu-item cerrar-sesion">
-                  <ion-icon name="log-out-outline" slot="start"></ion-icon> Cerrar Sesión
-              </ion-button>
-          </nav>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
-</ion-header>
+  <!-- Header reutilizable -->
+  <app-header></app-header>
 
+  <!-- Formulario -->
+  <ion-card class="card-registrarse">
+    <ion-card-content>
 
-<!-- Formulario -->
-<ion-content [fullscreen]="true">
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Nombre:" type="text" placeholder="Nombre completo" [(ngModel)]="nombre"></ion-input>
+      </ion-item>
 
-    <ion-card class="card-registrarse">
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Email:" type="text" placeholder="xxx@xxxx.com" [(ngModel)]="email"></ion-input>
+      </ion-item>
 
-      <ion-card-content>
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Telefono:" type="text" placeholder="Telefono" [(ngModel)]="telefono"></ion-input>
+      </ion-item>
 
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Nombre:" type="text" placeholder="Nombre completo" [(ngModel)]="nombre"></ion-input>
-          </ion-item>
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Direccion:" type="text" placeholder="Dirección" [(ngModel)]="direccion"></ion-input>
+      </ion-item>
 
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Email:" type="text" placeholder="xxx@xxxx.com" [(ngModel)]="email"></ion-input>
-          </ion-item>
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Usuario:" type="text" placeholder="Ingresa un usuario" [(ngModel)]="username"></ion-input>
+      </ion-item>
 
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Telefono:" type="text" placeholder="Telefono" [(ngModel)]="telefono"></ion-input>
-          </ion-item>
+      <ion-item [@slideAnimation]="animationState">
+        <ion-input label="Contraseña:" type="password" placeholder="••••" [(ngModel)]="password" ></ion-input>
+      </ion-item>
 
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Direccion:" type="text" placeholder="Dirección" [(ngModel)]="direccion"></ion-input>
-          </ion-item>
+      <div class="button-row">
+        <ion-button class="btn-green btn-left" (click)="modificar()">Modificar</ion-button>
+      </div> 
 
-          <!-- <ion-item [@slideAnimation]="animationState" class="ingreso-datos"> -->
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Usuario:" type="text" placeholder="Ingresa un usuario" [(ngModel)]="username"></ion-input>
-          </ion-item>
+      <div class="guardar">
+        <ion-button class="btn-green btn-guardar" expand="block" (click)="guardar()">Guardar</ion-button>
+      </div>
 
-          <ion-item [@slideAnimation]="animationState">
-            <ion-input label="Contraseña:" type="password" placeholder="••••" [(ngModel)]="password" ></ion-input>
-          </ion-item>
+    </ion-card-content>
+  </ion-card>
 
-          <div class="button-row">
-            <ion-button class="btn-green btn-left" (click)="modificar()">Modificar</ion-button>
-          </div> 
-
-        <div class =guardar>
-          <ion-button class="btn-green btn-guardar" expand="block" (click)="guardar()">Guardar</ion-button>
-        </div>
-      </ion-card-content>
-    </ion-card>
 </ion-content>
