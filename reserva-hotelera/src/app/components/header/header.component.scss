@@ -1,0 +1,66 @@
+/* Variables de color */
+:root {
+  --color-calipso: #00bcd4;      /* Calipso brillante */
+  --color-blanco: #ffffff;       /* Blanco puro */
+  --color-gris-claro: #ffffff;   /* Cambiado a blanco */
+  --color-gris-texto: #6c757d;   /* Gris oscuro suave para textos secundarios */
+  --color-azul-oscuro: #007a91;  /* Azul oscuro para contrastes */
+}
+
+/* Reset básico */
+ion-content {
+  --background: var(--color-blanco);
+  --ion-background-color: var(--color-blanco);
+  color: var(--color-azul-oscuro);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ion-header {
+  --background: var(--color-blanco);
+  --ion-background-color: var(--color-blanco);
+}
+
+.logo-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center; /* Centra verticalmente si hay texto o más elementos */
+  justify-content: flex-start; /* Alinea a la izquierda */
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  display: block; /* Para evitar espacio extra debajo de la imagen */
+}
+/* Menú */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-item {
+  color: var(--color-calipso);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+  color: var(--color-azul-oscuro);
+}
+
+.menu ion-avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-calipso);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu ion-avatar img:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-between">
+        <!-- Logo izquierda -->
+        <ion-col size="auto">
+          <img src="assets/img/logo.png" alt="HotelLogo" class="logo" />
+        </ion-col>
+
+        <!-- Menú derecha -->
+        <ion-col size="auto">
+          <nav class="menu">
+            <a (click)="irA('home')" class="menu-item">Home</a>
+            <a (click)="irA('reservas')" class="menu-item">Reservas</a>
+            <a (click)="irA('habitaciones1')" class="menu-item">Habitaciones</a>
+            <a (click)="irA('contacto')" class="menu-item">Contacto</a>
+            <ion-avatar class="menu-item" (click)="irA('login')">
+              <img src="assets/img/avatar.jpg" alt="Mi cuenta" />
+            </ion-avatar>
+          </nav>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>

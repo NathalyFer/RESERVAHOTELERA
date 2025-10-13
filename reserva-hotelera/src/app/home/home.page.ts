@@ -65,7 +65,7 @@ export class HomePage {
 
   //  Ver detalle de habitación
   verHabitacion(roomName: string) {
-    this.navCtrl.navigateForward(['/habitaciones'], {
+    this.navCtrl.navigateForward(['/habitaciones1'], {
       queryParams: { nombre: roomName }
     });
   }

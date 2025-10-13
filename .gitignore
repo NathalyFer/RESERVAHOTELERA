@@ -1,36 +1,38 @@
-# Angular specific
+# 👉 Angular / Ionic
 /dist/
 /out-tsc/
 /tmp/
 /coverage/
 /e2e/test-output/
-/.angular/
-/.angular-cli.json
-/.ng/
+.angular/
+.angular-cli.json
+.ng/
+www/
+platforms/
+plugins/
+/.sourcemaps
+/.versions
+/.ionic
 
-/www
-/platforms
-/plugins
-
-# Node modules and dependency files
-/node_modules/
-/package-lock.json
+# 👉 Node.js
+node_modules/
+**/node_modules/
+package-lock.json
 yarn.lock
+npm-debug.log
+yarn-error.log
 
-# Environment files
-/.env
-
-# TypeScript cache
+# 👉 TypeScript
 *.tsbuildinfo
 
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# 👉 Logs
 *.log
 log.txt
+testem.log
+libpeerconnection.log
 
-# IDEs and editors
+# 👉 IDEs y editores
+.vscode/
 .idea/
 .project
 .classpath
@@ -40,44 +42,53 @@ log.txt
 *.sublime-project
 *.sublime-workspace
 
-# Visual Studio Code
+# Historial de VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
+.history/
 
-# Miscellaneous
-/.angular
-/.angular/cache
+# 👉 Archivos misceláneos
+.angular/
+.angular/cache/
 .sass-cache/
-/.nx
-/.nx/cache
-/connect.lock
-/libpeerconnection.log
-testem.log
-/typings
+.nx/
+.nx/cache/
+connect.lock
+typings/
 
-# System files
+# 👉 Archivos del sistema
 .DS_Store
 Thumbs.db
-UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
+UserInterfaceState.xcuserstate
 
-# Ionic
-/.ionic
-/.sourcemaps
-/.versions
-
-# Bazel
-/bazel-out
-
-# Backend - Variables de entorno (NO subir credenciales)
+# 👉 Variables de entorno (credenciales)
+.env
 backend/.env
+
+# 👉 Python (para backend)
 backend/__pycache__/
 backend/*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+build/
+dist/
 
-# Auth0 y configuraciones sensibles
-# src/environments/environment.ts
-# src/environments/environment.prod.ts
+# 👉 Archivos temporales
+*.swp
+*.swo
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*

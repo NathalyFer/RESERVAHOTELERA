@@ -4,21 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MiCuentaPageRoutingModule } from './mi-cuenta-routing.module';
+import { CuentaPageRoutingModule } from './cuenta-routing.module';
 
-import { MiCuentaPage } from './mi-cuenta.page';
+import { CuentaPage } from './cuenta.page';
 
 import { SharedModule } from '../shared/chared.module';
-
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
     FormsModule,
     IonicModule,
-    MiCuentaPageRoutingModule
+    SharedModule,
+    CuentaPageRoutingModule
   ],
-  declarations: [MiCuentaPage]
+  declarations: [CuentaPage]
 })
-export class MiCuentaPageModule {}
+export class CuentaPageModule {}

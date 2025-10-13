@@ -59,6 +59,6 @@ app.post("/api/habitaciones", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Servidor backend corriendo en http://localhost:3000");
+app.listen(3001, () => {
+  console.log("Servidor backend corriendo en http://localhost:3001");
 });

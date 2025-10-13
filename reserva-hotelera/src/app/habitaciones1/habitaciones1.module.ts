@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
-import { MiCuentaPageRoutingModule } from './mi-cuenta-routing.module';
+import { Habitaciones1PageRoutingModule } from './habitaciones1-routing.module';
 
-import { MiCuentaPage } from './mi-cuenta.page';
+import { Habitaciones1Page } from './habitaciones1.page';
 
 import { SharedModule } from '../shared/chared.module';
-
 
 @NgModule({
   imports: [
@@ -17,8 +15,8 @@ import { SharedModule } from '../shared/chared.module';
     SharedModule,
     FormsModule,
     IonicModule,
-    MiCuentaPageRoutingModule
+    Habitaciones1PageRoutingModule
   ],
-  declarations: [MiCuentaPage]
+  declarations: [Habitaciones1Page]
 })
-export class MiCuentaPageModule {}
+export class Habitaciones1PageModule {}

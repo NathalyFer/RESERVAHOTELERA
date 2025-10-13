@@ -1,176 +1,50 @@
-/* ===== Variables de color ===== */
-:host {
-  --color-calipso: #00bcd4;
-  --color-blanco: #ffffff;
-  --color-gris-claro: #ffffff;
-  --color-gris-texto: #6c757d;
-  --color-azul-oscuro: #007a91;
+/* Fondo general blanco */
+.cuenta-page {
+  --background: #ffffff;
+  background-color: #ffffff;
+  color: #003b57;
 }
 
-/* ===== General ===== */
-ion-content {
-  --background: var(--color-blanco);
-  color: var(--color-azul-oscuro);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-ion-header {
-  --background: var(--color-blanco);
-}
-
-.logo {
-  width: 120px;
-  height: auto;
-  display: block;
-}
-
-/* ===== Menú ===== */
-.menu {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.menu-item {
-  --color: var(--color-calipso);
-  --background: transparent;
-  --box-shadow: none;
-  font-weight: 600;
-  font-size: 1rem;
-  text-transform: none;
-  margin: 0 4px;
-  transition: all 0.3s ease;
-}
-
-.menu-item:hover {
-  --color: var(--color-azul-oscuro);
-  --background: rgba(0, 188, 212, 0.1);
-}
-
-/* Estilos adicionales para los botones del menú */
-.menu ion-button {
-  --padding-start: 8px;
-  --padding-end: 8px;
-  --padding-top: 4px;
-  --padding-bottom: 4px;
-  height: auto;
-  min-height: 36px;
-}
-
-.menu ion-avatar img {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid var(--color-calipso);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.menu ion-avatar img:hover {
-  transform: scale(1.1);
-}
-
-/* Estilos para el botón de cerrar sesión */
-.menu-item.cerrar-sesion {
-  --color: var(--color-calipso);
-  --background: transparent;
-  --box-shadow: none;
-  font-weight: 600;
-  font-size: 1rem;
-  text-transform: none;
-  margin: 0 4px 0 10px;
-  transition: all 0.3s ease;
-}
-
-.menu-item.cerrar-sesion:hover {
-  --color: var(--color-azul-oscuro);
-  --background: rgba(0, 188, 212, 0.1);
-}
-
-.menu-item.cerrar-sesion ion-icon {
-  font-size: 1.2rem;
-  margin-right: 4px;
-}
-
-/* Responsive para el menú */
-@media (max-width: 768px) {
-  .menu {
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  
-  .menu-item {
-    font-size: 0.85rem;
-    margin: 0 2px;
-  }
-  
-  .menu-item.cerrar-sesion {
-    margin: 0 2px 0 5px;
-  }
-  
-  .logo {
-    width: 80px;
-  }
-}
-
-@media (max-width: 576px) {
-  .menu {
-    gap: 8px;
-  }
-  
-  .menu-item {
-    font-size: 0.75rem;
-    margin: 0 1px;
-  }
-  
-  .menu-item.cerrar-sesion {
-    margin: 0 1px 0 3px;
-  }
-  
-  .logo {
-    width: 60px;
-  }
-}
-
-/* ===== Formulario (ion-card) ===== */
+/* Tarjeta del formulario */
 .card-registrarse {
+  background: #e0f7fa; // azul marino muy claro
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 59, 87, 0.1);
   margin: 20px;
-  padding: 16px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  background: var(--color-blanco);
 }
 
+/* Inputs */
 ion-item {
   --background: transparent;
-  margin-bottom: 12px;
+  border-bottom: 1px solid #00bcd4;
+  margin-bottom: 10px;
+}
+
+ion-input {
+  color: #003b57;
+}
+
+/* Botones calipso */
+.btn-calipso {
+  --background: #00bcd4;
+  --background-hover: #00acc1;
+  --background-activated: #0097a7;
+  --color: #ffffff;
+  font-weight: 600;
   border-radius: 8px;
-  border: 1px solid var(--color-calipso);
+  margin-top: 12px;
 }
 
-/* ===== Botones ===== */
-ion-button.btn-green {
-  --background: var(--color-calipso);
-  --border-radius: 30px;
-  font-weight: 700;
-  padding: 12px 30px;
-  box-shadow: 0 6px 15px rgba(0, 188, 212, 0.3);
-  text-transform: uppercase;
-}
-
-ion-button.btn-green:hover {
-  --background: var(--color-azul-oscuro);
-}
-
+/* Alineación de botones */
 .button-row {
   display: flex;
-  justify-content: center;
-  margin-top: 16px;
+  justify-content: flex-end;
 }
 
 .guardar {
   margin-top: 12px;
 }
+
 
 /* ===== Footer ===== (si se incluye en esta misma página) */
 .footer-divider {
@@ -258,4 +132,39 @@ ion-button.btn-green:hover {
   color: var(--color-azul-oscuro);
   font-weight: 500;
   line-height: 1.4;
+}
+
+ion-card {
+  max-width: 600px;
+  margin: 24px auto;
+}
+
+.error-message {
+  color: #e53935; /* rojo para error */
+  font-size: 0.85rem;
+  margin: 4px 0 10px 12px;
+  font-weight: 600;
+}
+
+ion-content {
+  --background: #ffffff; // Fondo blanco limpio
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px; // Espacio interno en pantallas pequeñas
+}
+
+.card-registrarse {
+  width: 100%;
+  max-width: 500px; // Límite en pantallas grandes
+  margin: 0 auto; // Centrado horizontal
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1); // Sombra sutil para elegancia
+  border-radius: 12px;
+}
+
+ion-card-content {
+  padding: 24px;
+}
+.card-registrarse {
+  margin-top: 40px; // 👈 Ajusta según necesites (20px, 60px, etc.)
 }

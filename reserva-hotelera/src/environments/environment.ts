@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  auth0: {
+    domain: 'dev-xxxxxxxxxx.us.auth0.com', // Reemplaza con tu dominio de Auth0
+    clientId: 'xxxxxxxxxxxxxxxxxxxxxxxx', // Reemplaza con tu Client ID de Auth0
+    authorizationParams: {
+      redirect_uri: window.location.origin
+    }
+  }
 };
 
 /*

@@ -8,9 +8,12 @@ import { ReservasPageRoutingModule } from './reservas-routing.module';
 
 import { ReservasPage } from './reservas.page';
 
+import { SharedModule } from '../shared/chared.module';
+
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     IonicModule,
     ReservasPageRoutingModule

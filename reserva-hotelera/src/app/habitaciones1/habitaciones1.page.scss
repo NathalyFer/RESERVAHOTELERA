@@ -32,6 +32,7 @@ ion-header {
   height: auto;
   display: block; /* Para evitar espacio extra debajo de la imagen */
 }
+
 /* Menú */
 .menu {
   display: flex;
@@ -65,72 +66,6 @@ ion-header {
   transform: scale(1.1);
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-
-/* Tablets y pantallas medianas (768px o menos) */
-@media (max-width: 768px) {
-  .logo {
-    width: 80px;
-  }
-
-  .menu {
-    gap: 10px;
-  }
-
-  .menu-item {
-    font-size: 0.85rem;
-  }
-
-    .menu ion-avatar img {
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  /* Móviles (576px o menos) */
-@media (max-width: 576px) {
-  .logo {
-    width: 60px;
-  }
-
-  .menu {
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .menu-item {
-    font-size: 0.75rem;
-  }
-
-  .menu ion-avatar img {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-/* Pantallas muy pequeñas (400px o menos) */
-@media (max-width: 400px) {
-    .menu-item {
-    font-size: 0.7rem;
-  }
-
-  .footer-title {
-    font-size: 1.2rem;
-  }
-
-  .social-icon {
-    font-size: 1.5rem;
-  }
-
-  .contact-icon {
-    font-size: 1.2rem;
-  }
-
-  .contact-details p {
-    font-size: 0.75rem;
-  }
-
-}
 /* ========== FOOTER STYLES ========== */
 
 /* Línea separadora */
@@ -309,19 +244,4 @@ ion-header {
   .contact-details p {
     font-size: 0.8rem;
   }
-}
-/* Estilos del formulario de contacto */
-ion-item.invalid {
-  --highlight-color-focused: var(--ion-color-danger);
-  --border-color: var(--ion-color-danger);
-}
-
-ion-content {
-  --padding-top: 8px;
-  padding-inline: 16px;
-}
-
-.content-grid {
-  margin-top: 0;
-  padding-top: 0;
 }
